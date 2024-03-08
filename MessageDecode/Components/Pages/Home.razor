@@ -1,7 +1,42 @@
 ﻿@page "/"
+@inject IDecoderService _decoderService
+@inject IOptions<ErrorMessageOptions> _errorMessageOptions
+@rendermode InteractiveServer
+<PageTitle>MessageDecode</PageTitle>
 
-<PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<input type="text" autofocus @bind-value="Input" @bind-value:event="oninput" @bind-value:after="DecodeMessage"
+    placeholder="@Placeholder" />
 
-Welcome to your new app.
+<label class="OutputLabel">@Output</label>
+
+@code {
+    private string? Input;
+    private string? Output;
+    private string? Placeholder;
+
+    protected override void OnInitialized()
+    {
+        Placeholder = _errorMessageOptions.Value.Placeholder;
+        Output = _errorMessageOptions.Value.EmptyText;
+    }
+    private async Task DecodeMessage()
+    {
+        if (Input is null || Input == "")
+        {
+            Output = _errorMessageOptions.Value.EmptyText;
+            return;
+        }
+
+        Output = "";
+        var result = await _decoderService.DecodeMessage(Input);
+        if (result.IsSuccess)
+        {
+            Output = result.Value[0];
+        }
+        else
+        {
+            Output = string.Join("\r\n", result.Errors);
+        }
+    }
+}

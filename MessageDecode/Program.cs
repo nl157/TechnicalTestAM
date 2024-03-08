@@ -1,11 +1,14 @@
-using MessageDecode.Components;
+using MessageDecode.Services;
+using MessageDecode.Services.Interfaces;
+using MessageDecode.UI.Components;
+using MessageDecode.UI.Properties.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents();
-
+builder.Services.AddRazorComponents().AddInteractiveServerComponents();
+builder.Services.AddTransient<IDecoderService, DecoderService>();
+builder.Services.Configure<ErrorMessageOptions>(builder.Configuration.GetSection(ErrorMessageOptions.ErrorMessage));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
