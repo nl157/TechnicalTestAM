@@ -4,7 +4,4 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MessageDecode.Shared\MessageDecode.Shared.csproj" />
-  </ItemGroup>
 </Project>

@@ -15,12 +15,17 @@ namespace MessageDecode.Services
 
         public async Task<ServiceResult<List<string>>> DecodeMessage(string message)
         {
-            var result = await _inputValidationBuilder.IsValidInput(message);
+            //Validator
+            var validationResult = await _inputValidationBuilder.IsValidInput(message);
 
-            if (!result.IsSuccess)
+            if (!validationResult.IsSuccess)
             {
-                return new ServiceResult<List<string>>(result.Error);
+                return new ServiceResult<List<string>>(validationResult.Error);
             }
+
+
+            // Processor
+            
             return new ServiceResult<List<string>>([message.ToUpper()]);
         }
     }

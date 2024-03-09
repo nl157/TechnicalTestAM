@@ -7,32 +7,54 @@
 <input type="text" autofocus @bind-value="Input" @bind-value:event="oninput" @bind-value:after="DecodeMessage"
     placeholder="@Placeholder" />
 <br />
-@foreach (var label in Output)
+@if (IsSuccess)
 {
-    <label class="OutputLabel">@label</label>
-    <br/>
+    @foreach (var label in Output)
+    {
+        <label class="OutputLabel">@label</label>
+        <br />
+    }
+}
+else
+{
+    @foreach (var label in Output)
+    {
+        <tr>
+            <td>@label</td>
+        </tr>
+    }
 }
 
 @code {
     private string? Input;
     private List<string> Output = new List<string>();
     private string? Placeholder;
-
+    private bool IsSuccess = false;
     protected override void OnInitialized()
     {
         Placeholder = _errorMessageOptions.Value.Placeholder;
         Output.Add(_errorMessageOptions.Value.EmptyText);
     }
-    
+
     private async Task DecodeMessage()
     {
         Output.Clear();
         if (Input is null || Input == "")
         {
+            IsSuccess = false;
             Output.Add(_errorMessageOptions.Value.EmptyText);
             return;
         }
         var result = await _decoderService.DecodeMessage(Input);
-        Output = result.IsSuccess ? result.Data : result.Error!.Message.ToMultiLineString();
+        if (result.IsSuccess)
+        {
+            IsSuccess = result.IsSuccess;
+            Output = result.Data;
+        }
+        else
+        {
+            IsSuccess = result.IsSuccess;
+            Output = result.Error!.Message.ToMultiLineString();
+        }
     }
 }

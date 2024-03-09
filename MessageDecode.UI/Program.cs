@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 builder.Services.AddTransient<IDecoderService, DecoderService>();
 builder.Services.AddTransient<IInputValidationBuilder, InputValidationBuilder>();
-//builder.Services.AddTransient<IValidator<string>, Validator<string>>();
+builder.Services.AddTransient<IDecoderService, DecoderService>();
 
 builder.Services.Configure<ErrorMessageOptions>(builder.Configuration.GetSection(ErrorMessageOptions.ErrorMessage));
 builder.Services.Configure<ValidationOptions>(builder.Configuration.GetSection(ValidationOptions.Validation));
