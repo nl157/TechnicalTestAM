@@ -1,7 +1,7 @@
-namespace MessageDecode.Services.Interfaces;
+namespace MessageDecode.Validations.Interfaces;
 
 public interface IValidator<T> where T : class
 {
     IValidator<T> SetNext(IValidator<T> next);
-    void Handle(T request);
+    void Validate(T request);
 }

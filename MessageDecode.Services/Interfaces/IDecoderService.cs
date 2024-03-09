@@ -1,9 +1,9 @@
-﻿using Ardalis.Result;
+﻿using MessageDecode.Shared;
 
 namespace MessageDecode.Services.Interfaces
 {
     public interface IDecoderService
     {
-        Task<Result<List<string>>> DecodeMessage(string message);
+        Task<ServiceResult<List<string>>> DecodeMessage(string message);
     }
 }
