@@ -10,5 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MessageDecode.Shared\MessageDecode.Shared.csproj" />
     <ProjectReference Include="..\MessageDecode.Validations\MessageDecode.Validations.csproj" />
+    <ProjectReference Include="..\MessageDecode.Models\MessageDecode.Models.csproj" />
+    <ProjectReference Include="..\MessageDecode.Processor\MessageDecode.Processor.csproj" />
   </ItemGroup>
 </Project>

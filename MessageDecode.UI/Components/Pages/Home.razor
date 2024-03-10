@@ -1,6 +1,7 @@
 ﻿@page "/"
 @inject IDecoderService _decoderService
 @inject IOptions<ErrorMessageOptions> _errorMessageOptions
+@inject IOptions<MessageOptions> _messageOptions
 @rendermode InteractiveServer
 <PageTitle>MessageDecode</PageTitle>
 
@@ -45,7 +46,7 @@ else
             Output.Add(_errorMessageOptions.Value.EmptyText);
             return;
         }
-        var result = await _decoderService.DecodeMessage(Input);
+        var result = await _decoderService.DecodeMessage(new InputRequest() {Message = Input, MessageSectionSizes = _messageOptions.Value.MessageSectionSizes});
         if (result.IsSuccess)
         {
             IsSuccess = result.IsSuccess;

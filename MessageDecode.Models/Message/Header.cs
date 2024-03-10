@@ -1,6 +1,6 @@
 namespace MessageDecode.Models;
 
-public class TripHeader 
+public class Header 
 {
     public MessageType? Type { get; set; }
     public string? DeviceId { get; set; }    

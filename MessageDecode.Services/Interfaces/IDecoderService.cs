@@ -1,9 +1,10 @@
-﻿using MessageDecode.Shared;
+﻿using MessageDecode.Models;
+using MessageDecode.Shared;
 
 namespace MessageDecode.Services.Interfaces
 {
     public interface IDecoderService
     {
-        Task<ServiceResult<List<string>>> DecodeMessage(string message);
+        Task<ServiceResult<List<string>>> DecodeMessage(InputRequest message);
     }
 }

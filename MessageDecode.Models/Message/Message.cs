@@ -1,6 +1,6 @@
 namespace MessageDecode.Models.Presenter;
 
-public class TripMessage
+public class Message
 {
     public required int Speed { get; set; }
     public required int Odometer { get; set; }
