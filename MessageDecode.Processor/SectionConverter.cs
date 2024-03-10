@@ -9,7 +9,7 @@ public class SectionConverter
 {
     public static List<Section> ConvertSections(List<Section> groupedMessage)
     {
-        var dict = new Dictionary<SchemaSection, IMessageConverter>() {
+        var sectionWithConverters = new Dictionary<SchemaSection, IMessageConverter>() {
                 {SchemaSection.MessageType,new MessageTypeConverter()},
                 {SchemaSection.CurrentTime,new CurrentTimeConverter()},
                 {SchemaSection.DeviceId,new DeviceIdConverter()},
@@ -23,7 +23,7 @@ public class SectionConverter
 
         foreach (var section in groupedMessage)
         {
-            if (dict.TryGetValue(section.SchemaSection, out var converter))
+            if (sectionWithConverters.TryGetValue(section.SchemaSection, out var converter))
             {
                 converter.Convert(section);
             }

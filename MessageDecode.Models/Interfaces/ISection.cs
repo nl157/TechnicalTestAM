@@ -6,5 +6,5 @@ public interface ISection
 {
     SchemaSection SchemaSection { get; set; }
     IEnumerable<char[]>? GroupedBytes { get; set; }
-    object Value { get; set; }
+    object? Value { get; set; }
 }
