@@ -7,10 +7,9 @@ namespace MessageDecode.Processor.Converters
     {
         public void Convert(Section section)
         {
-            var convertedDecimal = HexToDecimalConverter.Convert(section.GroupedBytes!.Reverse());
-            var epoch = new DateTime(2000, 01, 01);
-            var convertedTime = new TimeSpan(0, 0, convertedDecimal);
-            section.Value = epoch + convertedTime;
+            var convertedDecimalSeconds = HexConverter.ConvertToSingleDecimal(section.GroupedBytes!.Reverse());
+            var convertedTime = new TimeSpan(0, 0, convertedDecimalSeconds);
+            section.Value = new DateTime(2000, 01, 01) + convertedTime;
         }
     }
 }

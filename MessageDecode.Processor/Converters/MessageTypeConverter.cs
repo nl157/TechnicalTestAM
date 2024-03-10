@@ -1,10 +1,5 @@
 ﻿using MessageDecode.Models;
 using MessageDecode.Processor.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MessageDecode.Processor.Converters
 {
@@ -12,7 +7,7 @@ namespace MessageDecode.Processor.Converters
     {
         public void Convert(Section section)
         {
-            throw new NotImplementedException();
+            section.Value = HexConverter.ConvertToSingleDecimal(section.GroupedBytes!.Reverse());
         }
     }
 }

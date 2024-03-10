@@ -7,7 +7,7 @@ public class TripIdConverter : IMessageConverter
 {
     public void Convert(Section section)
     {
-        throw new NotImplementedException();
+        section.Value = HexConverter.ConvertToSingleDecimal(section.GroupedBytes!.Reverse());
     }
 
 }

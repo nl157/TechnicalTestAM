@@ -18,8 +18,8 @@ public class SectionConverter
                 {SchemaSection.TripID, new TripIdConverter()},
                 {SchemaSection.TripStart,new TripConverter()},
                 {SchemaSection.TripEnd,new TripConverter()},
-                {SchemaSection.Latitude,new LatitudeConverter()},
-                {SchemaSection.Longitude,new LongitudeConverter()}};
+                {SchemaSection.Latitude,new CoordinatesConverter()},
+                {SchemaSection.Longitude,new CoordinatesConverter()}};
 
         foreach (var section in groupedMessage)
         {
