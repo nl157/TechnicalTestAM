@@ -17,19 +17,23 @@ namespace MessageDecode.Services
             _messageProcessor = messageProcessor;
         }
 
-        public async Task<ServiceResult<List<string>>> DecodeMessage(InputRequest request)
+        public async Task<ServiceResult<List<Section>>> DecodeMessage(InputRequest request)
         {
-            //Validator
             var validationResult = await _inputValidationBuilder.IsValidInput(request.Message!);
 
             if (!validationResult.IsSuccess)
             {
-                return new ServiceResult<List<string>>(validationResult.Error);
+                return new ServiceResult<List<Section>>(validationResult.Error);
             }
-            
-            // Processor
+
             var processorResult = _messageProcessor.Process(request);
-            return new ServiceResult<List<string>>([request.Message!.ToUpper()]);
+            
+            if (!processorResult.IsSuccess)
+            {
+                return new ServiceResult<List<Section>>(validationResult.Error);
+            }
+
+            return new ServiceResult<List<Section>>(processorResult.Data);
         }
     }
 }

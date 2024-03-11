@@ -1,61 +1,108 @@
 ﻿@page "/"
+
 @inject IDecoderService _decoderService
+@inject IMessagePresenter _messagePresenter
 @inject IOptions<ErrorMessageOptions> _errorMessageOptions
 @inject IOptions<MessageOptions> _messageOptions
 @rendermode InteractiveServer
+
 <PageTitle>MessageDecode</PageTitle>
 
-<input type="text" autofocus @bind-value="Input" @bind-value:event="oninput" @bind-value:after="DecodeMessage"
-    placeholder="@Placeholder" />
+<div class="input-group">
+    <input class="form-control" type="text" autofocus @bind-value="Input" @bind-value:event="oninput"
+        @bind-value:after="DecodeMessage" placeholder="@Placeholder" />
+</div>
 <br />
-@if (IsSuccess)
+@foreach (var errorMessage in Errors)
 {
-    @foreach (var label in Output)
-    {
-        <label class="OutputLabel">@label</label>
+    <div class="alert alert-danger" role="alert">
+        <label class="OutputLabel">@errorMessage</label>
         <br />
-    }
+    </div>
 }
-else
-{
-    @foreach (var label in Output)
-    {
+<br />
+<table class="table table-striped">
+    <thead>
         <tr>
-            <td>@label</td>
+            <th scope="col">Time</th>
+            <th scope="col">Description</th>
+            <th scope="col">Value</th>
         </tr>
-    }
-}
+    </thead>
+    <tbody>
+
+        @foreach (var outputSection in OutputTable)
+        {
+            <tr>
+                <td>@GetDate()</td>
+                <td>@outputSection.Description</td>
+                <td>@outputSection.Value</td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 @code {
     private string? Input;
-    private List<string> Output = new List<string>();
+    private List<string> Errors = new List<string>();
+    private List<SectionDescription> OutputTable = new List<SectionDescription>();
     private string? Placeholder;
-    private bool IsSuccess = false;
     protected override void OnInitialized()
     {
         Placeholder = _errorMessageOptions.Value.Placeholder;
-        Output.Add(_errorMessageOptions.Value.EmptyText);
+        Errors.Add(_errorMessageOptions.Value.EmptyText);
     }
 
     private async Task DecodeMessage()
     {
-        Output.Clear();
+        Errors.Clear();
+        OutputTable.Clear();
+
         if (Input is null || Input == "")
         {
-            IsSuccess = false;
-            Output.Add(_errorMessageOptions.Value.EmptyText);
+            Errors.Add(_errorMessageOptions.Value.EmptyText);
             return;
         }
-        var result = await _decoderService.DecodeMessage(new InputRequest() {Message = Input, MessageSectionSizes = _messageOptions.Value.MessageSectionSizes});
+
+        var result = await _decoderService.DecodeMessage(new InputRequest()
+            {
+                Message = Input,
+                MessageSectionSizes = _messageOptions.Value.MessageSectionSizes
+            });
+
         if (result.IsSuccess)
         {
-            IsSuccess = result.IsSuccess;
-            Output = result.Data;
+            UpdateTable(result.Data);
         }
         else
         {
-            IsSuccess = result.IsSuccess;
-            Output = result.Error!.Message.ToMultiLineString();
+            if (result.Error != null)
+            {
+                UpdateErrors(result.Error!.Message.ToMultiLineString());
+            }
         }
+
+    }
+
+    private void UpdateTable(List<Section> result)
+    {
+        var presenterResult = _messagePresenter.Present(result);
+
+        if (!presenterResult.IsSuccess)
+        {
+            UpdateErrors(presenterResult.Error!.Message.ToMultiLineString());
+        }
+
+        OutputTable = presenterResult.Data;
+
+    }
+
+    private void UpdateErrors(List<string> result)
+    {
+        Errors = result;
+    }
+    private string GetDate()
+    {
+        return DateTime.Now.ToLongTimeString();
     }
 }

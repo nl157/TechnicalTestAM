@@ -1,6 +1,9 @@
+using MessageDecode.Processor;
+using MessageDecode.Processor.Interfaces;
 using MessageDecode.Services;
 using MessageDecode.Services.Interfaces;
 using MessageDecode.UI.Components;
+using MessageDecode.UI.Presenter;
 using MessageDecode.UI.Properties.Options;
 using MessageDecode.Validations;
 using MessageDecode.Validations.Interfaces;
@@ -11,7 +14,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 builder.Services.AddTransient<IDecoderService, DecoderService>();
 builder.Services.AddTransient<IInputValidationBuilder, InputValidationBuilder>();
-builder.Services.AddTransient<IDecoderService, DecoderService>();
+builder.Services.AddTransient<IMessageProcessor, MessageProcessor>();
+builder.Services.AddTransient<IMessagePresenter, MessagePresenter>();
 
 builder.Services.Configure<ErrorMessageOptions>(builder.Configuration.GetSection(ErrorMessageOptions.ErrorMessage));
 builder.Services.Configure<DescriptionOptions>(builder.Configuration.GetSection(DescriptionOptions.Descriptions));

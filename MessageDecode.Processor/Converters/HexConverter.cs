@@ -1,11 +1,31 @@
 
-using System.Collections;
-using System.Net.NetworkInformation;
-
 namespace MessageDecode.Processor.Converters;
-
+/// <summary>
+/// This manages multiple conversions from Hexidecimal format
+/// </summary>
 public static class HexConverter
 {
+    /// <summary>
+    /// Converts Hex to a single decimal with the option to reverse the list
+    /// </summary>
+    /// <param name="hexList">List input</param>
+    /// <param name="reverseList">Reverse the inputted list</param>
+    /// <returns></returns>
+    public static int ConvertToSingleDecimal(IEnumerable<char[]> hexList, bool reverseList)
+    {
+        if (reverseList)
+        {
+            hexList = hexList.Reverse();
+        }
+
+        return ConvertToSingleDecimal(hexList);
+    }
+
+    /// <summary>
+    /// Converts Hex to a single decimal
+    /// </summary>
+    /// <param name="hexList">List Input</param>
+    /// <returns></returns>
     public static int ConvertToSingleDecimal(IEnumerable<char[]> hexList)
     {
         var parsedChars = new List<char>();
@@ -19,6 +39,27 @@ public static class HexConverter
         return int.Parse(new string(parsedChars.ToArray()), System.Globalization.NumberStyles.HexNumber);
     }
 
+    /// <summary>
+    /// Converts Hex to a decimal list with the option to reverse the list
+    /// </summary>
+    /// <param name="hexList">List input</param>
+    /// <param name="reverseList">Reverse the inputted list</param>
+    /// <returns></returns>
+    public static List<int> ConvertToDecimalList(IEnumerable<char[]> hexList, bool reverseList)
+    {
+        if (reverseList)
+        {
+            hexList = hexList.Reverse();
+        }
+
+        return ConvertToDecimalList(hexList);
+    }
+
+    /// <summary>
+    /// Converts Hex to a decimal list
+    /// </summary>
+    /// <param name="hexList">List Input</param>
+    /// <returns></returns>
     public static List<int> ConvertToDecimalList(IEnumerable<char[]> hexList)
     {
         var parsedHex = new List<int>();
@@ -29,5 +70,10 @@ public static class HexConverter
         return parsedHex;
     }
 
-    public static bool ConvertToBool(char[] hex) => int.Parse(new string(hex), System.Globalization.NumberStyles.HexNumber) % 2 == 1;
+    /// <summary>
+    /// Converts a byte to a boolean value
+    /// </summary>
+    /// <param name="hex"></param>
+    /// <returns></returns>
+    public static bool ConvertToBool(char[] hex) => Convert.ToBoolean(int.Parse(new string(hex), System.Globalization.NumberStyles.HexNumber));
 }

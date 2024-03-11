@@ -4,7 +4,7 @@ namespace MessageDecode.Validations.Validators;
 
 public abstract class Validator<T> : IValidator<T> where T : class
 {
-    private IValidator<T>? NextValidator {get; set;}
+    private IValidator<T>? NextValidator { get; set; }
     public virtual void Validate(T request)
     {
         NextValidator?.Validate(request);

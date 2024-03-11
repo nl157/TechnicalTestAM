@@ -3,8 +3,16 @@ using MessageDecode.Shared;
 
 namespace MessageDecode.Services.Interfaces
 {
+    /// <summary>
+    /// Service that manages the steps of Decoding the InputRequest.
+    /// </summary>
     public interface IDecoderService
     {
-        Task<ServiceResult<List<string>>> DecodeMessage(InputRequest message);
+        /// <summary>
+        /// Sends the Input Request for validation and then processes the Validated message.
+        /// </summary>
+        /// <param name="message">Input from User</param>
+        /// <returns>A list of each decoded message section</returns>
+        Task<ServiceResult<List<Section>>> DecodeMessage(InputRequest message);
     }
 }

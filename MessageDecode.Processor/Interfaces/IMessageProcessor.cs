@@ -1,8 +1,9 @@
 using MessageDecode.Models;
+using MessageDecode.Shared;
 
 namespace MessageDecode.Processor.Interfaces;
 
 public interface IMessageProcessor
 {
-    TripSegment Process(InputRequest message);
+    ServiceResult<List<Section>> Process(InputRequest message);
 }
