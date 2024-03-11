@@ -6,7 +6,7 @@ namespace MessageDecode.Processor.Converters
     /// <summary>
     /// Manages the conversion for generating the Device Id
     /// </summary>
-    internal class DeviceIdConverter : IMessageConverter
+    public class DeviceIdConverter : IMessageConverter
     {
         /// <summary>
         /// Converts a byte array to an ascii string for the Device Id

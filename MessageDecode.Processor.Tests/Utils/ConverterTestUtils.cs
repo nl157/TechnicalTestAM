@@ -8,4 +8,5 @@ public static class ConverterTestUtils
         var groupedBytes = odometerBytes.Select(x => x.ToCharArray()).ToList();
         return groupedBytes;
     }
+
 }

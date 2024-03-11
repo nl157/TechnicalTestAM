@@ -6,7 +6,7 @@ namespace MessageDecode.Processor.Converters
     /// <summary>
     /// Manages the conversion of the section data to the current time
     /// </summary>
-    internal class CurrentTimeConverter : IMessageConverter
+    public class CurrentTimeConverter : IMessageConverter
     {
         /// <summary>
         /// Converts Bytes to current time based on a fixed time.

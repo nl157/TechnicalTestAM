@@ -6,7 +6,7 @@ namespace MessageDecode.Processor.Converters
     /// <summary>
     /// Manages the conversion of a Byte array into a MPH value.
     /// </summary>
-    internal class CurrentSpeedConverter : IMessageConverter
+    public class CurrentSpeedConverter : IMessageConverter
     {
         /// <summary>
         /// Converts the byte array into a decimal between 0 - 300

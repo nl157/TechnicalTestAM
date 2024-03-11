@@ -5,7 +5,7 @@ namespace MessageDecode.Processor.Converters
     /// <summary>
     /// Manages Conversion for odometer readings.
     /// </summary>
-    internal class OdometerConverter : IMessageConverter
+    public class OdometerConverter : IMessageConverter
     {
         /// <summary>
         /// Converts byte array to a double based odometer value.

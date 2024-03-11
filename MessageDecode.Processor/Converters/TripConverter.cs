@@ -6,7 +6,7 @@ namespace MessageDecode.Processor.Converters
     /// <summary>
     /// Manages conversion for boolean values
     /// </summary>
-    internal class TripConverter : IMessageConverter
+    public class TripConverter : IMessageConverter
     {
         /// <summary>
         /// Converts a single byte to bool

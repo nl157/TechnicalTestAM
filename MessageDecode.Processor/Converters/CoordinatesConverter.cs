@@ -5,7 +5,7 @@ namespace MessageDecode.Processor.Converters
     /// <summary>
     /// Converts Section Data into Coordinates
     /// </summary>
-    internal class CoordinatesConverter : IMessageConverter
+    public class CoordinatesConverter : IMessageConverter
     {
         /// <summary>
         /// Converts the group of bytes into a single value and then to Coordinates
