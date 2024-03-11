@@ -13,6 +13,6 @@ namespace MessageDecode.Services.Interfaces
         /// </summary>
         /// <param name="message">Input from User</param>
         /// <returns>A list of each decoded message section</returns>
-        Task<ServiceResult<List<Section>>> DecodeMessage(InputRequest message);
+        ServiceResult<List<Section>> DecodeMessage(InputRequest message);
     }
 }

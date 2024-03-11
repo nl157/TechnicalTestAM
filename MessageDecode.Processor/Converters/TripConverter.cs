@@ -8,6 +8,8 @@ namespace MessageDecode.Processor.Converters
     /// </summary>
     public class TripConverter : IMessageConverter
     {
+        private static readonly string[] sourceArray = ["00", "01"];
+
         /// <summary>
         /// Converts a single byte to bool
         /// </summary>
@@ -20,9 +22,9 @@ namespace MessageDecode.Processor.Converters
                 throw new Exception("Trip requires a single byte");
             }
 
-            var byteString = section.GroupedBytes!.First();
+            var onlyByte = section.GroupedBytes!.First();
 
-            if (byteString.ToString() != "00" || byteString.ToString() != "01")
+            if (!(sourceArray).Contains(new string(onlyByte)))
             {
                 throw new Exception("Byte value not in bool range (00 or 01)");
             }

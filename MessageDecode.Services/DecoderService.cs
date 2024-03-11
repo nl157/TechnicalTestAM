@@ -17,7 +17,7 @@ namespace MessageDecode.Services
             _messageProcessor = messageProcessor;
         }
 
-        public async Task<ServiceResult<List<Section>>> DecodeMessage(InputRequest request)
+        public ServiceResult<List<Section>> DecodeMessage(InputRequest request)
         {
             var validationResult = _inputValidationBuilder.IsValidInput(request.Message!);
 
@@ -27,10 +27,10 @@ namespace MessageDecode.Services
             }
 
             var processorResult = _messageProcessor.Process(request);
-            
+
             if (!processorResult.IsSuccess)
             {
-                return new ServiceResult<List<Section>>(validationResult.Error);
+                return new ServiceResult<List<Section>>(processorResult.Error);
             }
 
             return new ServiceResult<List<Section>>(processorResult.Data);
