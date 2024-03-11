@@ -8,10 +8,10 @@ namespace MessageDecode.Services
 {
     public class DecoderService : IDecoderService
     {
-        private readonly IInputValidationBuilder _inputValidationBuilder;
+        private readonly IInputValidator _inputValidationBuilder;
         private readonly IMessageProcessor _messageProcessor;
 
-        public DecoderService(IInputValidationBuilder inputValidationBuilder, IMessageProcessor messageProcessor)
+        public DecoderService(IInputValidator inputValidationBuilder, IMessageProcessor messageProcessor)
         {
             _inputValidationBuilder = inputValidationBuilder;
             _messageProcessor = messageProcessor;
@@ -19,7 +19,7 @@ namespace MessageDecode.Services
 
         public async Task<ServiceResult<List<Section>>> DecodeMessage(InputRequest request)
         {
-            var validationResult = await _inputValidationBuilder.IsValidInput(request.Message!);
+            var validationResult = _inputValidationBuilder.IsValidInput(request.Message!);
 
             if (!validationResult.IsSuccess)
             {

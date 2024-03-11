@@ -3,9 +3,9 @@ using MessageDecode.Validations.Interfaces;
 using MessageDecode.Validations.Validators;
 namespace MessageDecode.Validations;
 
-public class InputValidationBuilder : IInputValidationBuilder
+public class InputValidator : IInputValidator
 {
-    public Task<ServiceResult<bool>> IsValidInput(string input)
+    public ServiceResult<bool> IsValidInput(string input)
     {
         try
         {
@@ -15,9 +15,9 @@ public class InputValidationBuilder : IInputValidationBuilder
         }
         catch (Exception e)
         {
-            return Task.FromResult(new ServiceResult<bool>(e));
+            return new ServiceResult<bool>(e);
         }
 
-        return Task.FromResult(new ServiceResult<bool>(true));
+        return new ServiceResult<bool>(true);
     }
 }

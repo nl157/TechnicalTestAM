@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 builder.Services.AddTransient<IDecoderService, DecoderService>();
-builder.Services.AddTransient<IInputValidationBuilder, InputValidationBuilder>();
+builder.Services.AddTransient<IInputValidator, InputValidator>();
 builder.Services.AddTransient<IMessageProcessor, MessageProcessor>();
 builder.Services.AddTransient<IMessagePresenter, MessagePresenter>();
 

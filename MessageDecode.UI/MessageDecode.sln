@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageDecode.Processor", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageDecode.Processor.Tests", "..\MessageDecode.Processor.Tests\MessageDecode.Processor.Tests.csproj", "{EA7E4609-248B-4EEF-B29D-66BD81A92AF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageDecode.Models", "..\MessageDecode.Models\MessageDecode.Models.csproj", "{A550DD18-218C-4B22-964F-5CD9757D212F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageDecode.Models", "..\MessageDecode.Models\MessageDecode.Models.csproj", "{A550DD18-218C-4B22-964F-5CD9757D212F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageDecode.Validations.Tests", "..\MessageDecode.Validations.Tests\MessageDecode.Validations.Tests.csproj", "{77E7504E-059F-4365-9C59-ED570F2B1473}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{A550DD18-218C-4B22-964F-5CD9757D212F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A550DD18-218C-4B22-964F-5CD9757D212F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A550DD18-218C-4B22-964F-5CD9757D212F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77E7504E-059F-4365-9C59-ED570F2B1473}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77E7504E-059F-4365-9C59-ED570F2B1473}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77E7504E-059F-4365-9C59-ED570F2B1473}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77E7504E-059F-4365-9C59-ED570F2B1473}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
